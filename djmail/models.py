@@ -35,6 +35,7 @@ class Alias(models.Model):
     destination = models.CharField(max_length = 128)
     class Meta:
         unique_together = ('local_part', 'domain')
+        verbose_name_plural = 'Aliases'
     def __unicode__(self):
         return '%s@%s => %s' % (self.local_part, self.domain.name, self.destination)
 
