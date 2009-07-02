@@ -1,0 +1,23 @@
+
+MYSQL_SERVER            localhost
+MYSQL_USERNAME          djmail
+MYSQL_DATABASE          djmail
+
+MYSQL_USER_TABLE        djmail_user
+
+#MYSQL_PASSWORD          secret
+
+MYSQL_SELECT_CLAUSE     SELECT u.username, \
+                        u.crypt, \
+                        u.password, \
+                        8, \
+                        9, \
+                        CONCAT('/mail/', d.name, '/', u.username), \
+                        '', \
+                        u.quota, \
+                        '' \
+                        FROM djmail_user AS u JOIN djmail_domain AS d \
+                        ON d.id = u.domain_id \
+                        WHERE d.name = '$(domain)' \
+                        AND u.username = '$(local_part)'
+

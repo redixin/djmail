@@ -1,0 +1,41 @@
+
+
+
+    INSTALLING MYSQL
+
+Log in to your mysql as root and execute:
+
+CREATE DATABASE djmail;
+GRANT ALL PRIVILEGES ON djmail.* TO djmail@localhost;
+
+If you want to set password for user djmail, you must specify it in following files:
+
+settings.py (DATABASE_PASSWORD)
+/etc/exim/exim.conf (mysql_servers)
+/etc/courier/authlib/authpgsqlrc (MYSQL_PASSWORD)
+
+Also it works fine with postgresql too. (Of course with some changes in configuration 
+files, and sql queries in exim.conf)
+
+    INSTALLING DJANGO
+
+http://www.djangoproject.com/download/
+
+    INSTALLING DJMAIL
+
+Just copy 'webmail' directory in location you want to live it, cd to it, and run 
+'./manage.py syncdb'
+
+    INSTALLING EXIM
+
+Sample configuration file can be found in config_files directory. Just change 
+primary_hostname, relay_from_hosts, and mysql_servers if you wish.
+
+    INSTALLING COURIER-IMAP
+
+Make sure that /etc/courier/authlib/authdaemonrc has following line:
+
+authmodulelist="authmysql "
+
+Contents of /etc/courier/authlib/authmysqlrc can be found in config_files directory.
+

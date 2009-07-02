@@ -1,0 +1,29 @@
+
+PGSQL_HOST              localhost
+PGSQL_USERNAME          username
+PGSQL_PASSWORD          password
+
+PGSQL_DATABASE          billy
+PGSQL_USER_TABLE        mail_user
+PGSQL_CRYPT_PWFIELD     crypt
+PGSQL_CLEAR_PWFIELD     clear
+PGSQL_UID_FIELD         uid
+PGSQL_GID_FIELD         gid
+PGSQL_LOGIN_FIELD       id
+PGSQL_HOME_FIELD        home
+PGSQL_NAME_FIELD        name
+
+PGSQL_SELECT_CLAUSE     SELECT u.username, \
+                        u.crypt, \
+                        u.password, \
+                        8, \
+                        9, \
+                        '/mail/' || d.name || '/' || u.username, \
+                        '', \
+                        u.quota, \
+                        '' \
+                        FROM mail_user AS u JOIN mail_domain AS d \
+                        ON d.id = u.domain_id \
+                        WHERE d.name = '$(domain)' \
+                        AND u.username = '$(local_part)'
+
