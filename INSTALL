@@ -55,10 +55,28 @@ Contents of /etc/courier/authlib/authmysqlrc can be found in config_files direct
 
 
 =====================================================
-6 RUNNING
+6   RUNNING
 =====================================================
 
 Now you can su into user 'mail' and run './manage.py runserver'. Then put your browser 
 to http://localhost:8000/admin/ and log in as superuser which you create on step 3.
 As you can see, here you can create domains, users, routes and aliases.
+
+
+=====================================================
+7   NGINX
+=====================================================
+
+Nginx configuration can be found in config_files directory.
+You must change only 'alias' setting in section 'location /amedia/'
+
+>>> import django
+>>> django
+<module 'django' from '/usr/lib/python2.5/site-packages/django/__init__.pyc'>
+>>> 
+
+As you can see django installed in /usr/lib/python2.5/site-packages/django/ so
+I need to append contrib/admin/media/ and now I have
+/usr/lib/python2.5/site-packages/django/contrib/admin/media/
+In your system paths may be different.
 
