@@ -68,7 +68,7 @@ As you can see, here you can create domains, users, routes and aliases.
 =====================================================
 
 Nginx configuration can be found in config_files directory.
-You must change only 'alias' setting in section 'location /amedia/'
+You must change only 'alias' setting in section 'location /amedia/' and value of 'listen' if you wish.
 
 >>> import django
 >>> django
