@@ -80,3 +80,12 @@ I need to append contrib/admin/media/ and now I have
 /usr/lib/python2.5/site-packages/django/contrib/admin/media/
 In your system paths may be different.
 
+
+=====================================================
+8   RUNNING ON NGINX
+=====================================================
+
+In addition to nginx you must run script start.sh
+Add it to any autorun script. For example /etc/conf.d/local.start (in gentoo)
+
+
