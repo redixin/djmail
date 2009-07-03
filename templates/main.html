@@ -1,0 +1,33 @@
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+<meta http-equiv="content-type" content="text/html; charset=utf8">
+<title></title>
+<style type=text/css>
+div { margin: 2in; }
+label { float: right; font-size: 15pt; }
+input { font-size: 15pt; }
+caption { font-size: 18pt; }
+.errorlist li { color: red; }
+.error { color: red; }
+</style>
+</head>
+
+<body>
+
+<div>
+<form method=post>
+<table>
+<caption>{% trans 'Change password' %}</caption>
+{{form}}
+<tr><td colspan=1><input type=submit value="{% trans 'Change' %}">
+</form>
+{% if error %}
+<p class=error>{% trans 'Error' %}</p>
+{% endif %}
+</div>
+
+</body>
+</html>
