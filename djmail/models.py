@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import Group
 
 class Domain(models.Model):
     name = models.CharField(max_length = 128)
@@ -8,6 +9,14 @@ class Domain(models.Model):
         unique_together = ('name', 'type')
     def __unicode__(self):
         return self.name
+
+class Access(models.Model):
+    domain = models.ForeignKey(Domain)
+    group = models.ForeignKey(Group)
+    class Meta:
+        verbose_name_plural = 'Access lists'
+    def __unicode__(self):
+        return "%s => %s" % (self.group, self.domain)
 
 class User(models.Model):
     domain = models.ForeignKey(Domain)
@@ -27,7 +36,6 @@ class User(models.Model):
         self.crypt = crypt.crypt(self.password, salt)
         super(User, self).save()
         os.system('%s/createdir %s' % (settings.PROJECT_ROOT, self.pk))
-
 
 class Alias(models.Model):
     local_part = models.CharField(max_length = 64)
