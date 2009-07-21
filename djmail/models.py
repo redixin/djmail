@@ -2,9 +2,15 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import Group
 
+class AclDomainManager(models.Manager):
+    def get_query_set(self):
+        from middlewares import get_current_user
+        return super(AclDomainManager, self).get_query_set().filter(pk__in = Access.objects.filter(group__in = get_current_user().groups.all()))
+
 class Domain(models.Model):
     name = models.CharField(max_length = 128)
     type = models.CharField(choices = (('VIRTUAL', 'VIRTUAL',), ('RELAY', 'RELAY'), ('LOCAL', 'LOCAL')), max_length = 16)
+    objects = AclDomainManager()
     class Meta:
         unique_together = ('name', 'type')
     def __unicode__(self):
